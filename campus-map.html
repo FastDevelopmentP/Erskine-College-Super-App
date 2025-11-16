@@ -65,23 +65,48 @@
       </p>
     </header>
 
-    <!-- API Placeholder -->
+    <!-- API #1: Map (embed) -->
     <section class="mb-4 reveal-on-scroll">
-      <h2 class="h4">Interactive Map</h2>
-      <p>
-        A live campus map will appear here using a mapping API (e.g., Google Maps).
+      <h2 class="h4">Interactive Campus Map</h2>
+      <p class="mb-2">
+        Explore buildings, residence halls, and facilities around campus.
       </p>
-
-      <!-- For now, just a placeholder box -->
-      <div id="map-placeholder" class="border rounded bg-light p-5 text-center">
-        Map API coming soon...
+      <div class="ratio ratio-16x9 mb-2">
+        <iframe 
+          id="campus-map-frame"
+          src="https://www.google.com/maps?q=Erskine%20College%20Due%20West%20SC&output=embed" 
+          width="640" 
+          height="480"
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
+      <small class="text-muted d-block">
+        Map data provided by Google Maps.
+      </small>
     </section>
 
+    <!-- API #2: Weather -->
+    <section class="mb-4 reveal-on-scroll">
+      <h2 class="h4">Today’s Weather in Due West</h2>
+      <p class="mb-2">
+        Helpful when you’re planning walks across campus or outdoor practices.
+      </p>
+      <div id="weather-box" class="border rounded p-3 bg-light">
+        <p class="mb-0">Loading current weather for Due West…</p>
+      </div>
+      <small class="text-muted d-block mt-2">
+        Powered by OpenWeatherMap.
+      </small>
+    </section>
+
+    <!-- Directions form (JS event-driven behavior) -->
     <section class="reveal-on-scroll">
       <h2 class="h4">Quick Directions</h2>
       <p>
-        In the final version, you’ll be able to enter a building name and get walking directions.
+        Enter a building name or residence hall to search for it on the map.
       </p>
       <form id="directions-form" class="row g-3">
         <div class="col-md-8">
@@ -96,13 +121,11 @@
         </div>
         <div class="col-md-4 d-flex align-items-end">
           <button type="submit" class="btn btn-primary w-100">
-            Get Directions (Placeholder)
+            Get Directions
           </button>
         </div>
       </form>
-      <small class="text-muted">
-        This form will eventually trigger the map API. For now, it is used for event-driven JS.
-      </small>
+      <p id="directions-status" class="text-muted small mt-2"></p>
     </section>
   </main>
 

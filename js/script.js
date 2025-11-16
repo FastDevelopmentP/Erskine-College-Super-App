@@ -1,7 +1,5 @@
-// script.js 
-// Handles interactive behavior across the Campus Life Super App.
-
-const THEME_STORAGE_KEY = "campus-life-theme";
+// script.js
+// Interactivity and API calls for the Campus Life Super App.
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Campus Life Super App JS loaded.");
@@ -10,49 +8,53 @@ document.addEventListener("DOMContentLoaded", () => {
   setupHousingButtons();
   setupThemeToggle();
   setupScrollReveal();
+  loadDueWestWeather();
 });
 
-/**
- * Attach a submit handler to the directions form on campus-map.html.
- * Currently a placeholder for future map API logic.
- */
+// -------------------------------
+// Directions form (Campus Map)
+// -------------------------------
 function setupDirectionsForm() {
   const form = document.getElementById("directions-form");
   const buildingInput = document.getElementById("building-input");
+  const mapFrame = document.getElementById("campus-map-frame");
+  const statusLine = document.getElementById("directions-status");
 
-  if (!form || !buildingInput) {
-    // Not on the campus-map page.
-    return;
-  }
+  // If we're not on the Campus Map page, stop.
+  if (!form || !buildingInput || !mapFrame) return;
 
   form.addEventListener("submit", (event) => {
-    event.preventDefault(); // prevent page reload
+    event.preventDefault();
 
     const building = buildingInput.value.trim();
     if (!building) {
-      alert("Please enter a destination building.");
+      alert("Please enter a destination building or hall.");
       return;
     }
 
-    alert(`Directions feature coming soon for: ${building}`);
-    console.log(`Directions requested for: ${building}`);
+    // Build a Google Maps search query centered on Erskine.
+    const query = encodeURIComponent(`${building}, Erskine College, Due West SC`);
 
-    // TODO: Replace alert with a real map API call.
+    // Tell the embedded map to show that search.
+    mapFrame.src = `https://www.google.com/maps?q=${query}&output=embed`;
+
+    if (statusLine) {
+      statusLine.textContent = `Showing map results for: ${building}`;
+    }
+
+    console.log(`Updated map for destination: ${building}`);
   });
 }
 
-/**
- * Attach click handlers to housing buttons on housing-services.html.
- * Shows basic dynamic content without an API.
- */
+// -------------------------------
+// Housing buttons (Housing page)
+// -------------------------------
 function setupHousingButtons() {
   const buttons = document.querySelectorAll(".housing-button");
   const detailsBox = document.getElementById("housing-details");
 
-  if (!buttons.length || !detailsBox) {
-    // Not on housing-services page.
-    return;
-  }
+  // Not on the housing page
+  if (!buttons.length || !detailsBox) return;
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -63,82 +65,140 @@ function setupHousingButtons() {
   });
 }
 
-/**
- * Return a short description for each hall.
- * This could later be replaced by data from an API or JSON file.
- */
 function getHallMessage(hallName) {
   switch (hallName) {
     case "Watkins":
-      return "Watkins: Student center with Snappers, ping pong, and frequent events in a central location close to dining and student life.";
+      return "Watkins: Student center with Snappers, ping pong, and frequent events in a central campus location.";
     case "Bonner":
-      return "Bonner: Largest dorm; great for student-athletes seeking an athlete-driven community.";
+      return "Bonner: Biggest dorm on campus, popular with student-athletes and a lively community.";
     case "Greer":
-      return "Greer: Freshman men's dorm near the baseball and football fields with lots of social events.";
+      return "Greer: Freshman men’s dorm near the baseball and football fields with lots of social events.";
     case "McQuiston":
-      return "McQuiston: Spacious Honors housing with modern amenities.";
+      return "McQuiston: Honors housing with quieter hall culture and easy access to academics.";
     case "Pressly":
-      return "Pressly: Upperclassmen men's dorm near Greer and the fields.";
+      return "Pressly: Upperclassmen men’s hall near Greer and the athletic fields.";
     case "Kennedy":
-      return "Kennedy: Upperclassmen men's dorm near Bonner with a strong athlete community.";
+      return "Kennedy: Upperclassmen men’s hall close to Bonner and other athlete housing.";
     case "Carnegie":
-      return "Carnegie: Freshman women's dorm on Bonner Circle, surrounded by academic buildings and social events.";
+      return "Carnegie: Freshman women’s dorm on Bonner Circle, surrounded by academic buildings.";
     case "Robinson":
-      return "Robinson: Upperclassmen women's dorm on Bonner Circle near classroom buildings.";
+      return "Robinson: Upperclassmen women’s dorm on Bonner Circle, close to classes and chapel.";
     case "Edwards":
-      return "Edwards: Honors women's dorm in the center of campus—often considered the nicest housing on campus.";
+      return "Edwards: Honors women’s housing in the center of campus, often considered the nicest housing on campus.";
     default:
       return `${hallName}: Hall information coming soon.`;
   }
 }
 
-/**
- * Theme toggle: switches between light and dark mode.
- * Saves the user's preference in localStorage.
- */
+// -------------------------------
+// Theme toggle (light / dark)
+// -------------------------------
 function setupThemeToggle() {
-  const toggleButton = document.getElementById("theme-toggle");
-  if (!toggleButton) {
-    return;
-  }
+  const toggleBtn = document.getElementById("theme-toggle");
+  if (!toggleBtn) return;
 
-  // Apply saved preference on load
-  const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-  if (savedTheme === "dark") {
-    document.body.classList.add("theme-dark");
-    toggleButton.textContent = "☀️ Light Mode";
-  }
+  const stored = localStorage.getItem("clsa-theme");
+  const initialMode = stored === "dark" ? "dark" : "light";
+  applyTheme(initialMode);
+  updateThemeButtonLabel(toggleBtn, initialMode);
 
-  toggleButton.addEventListener("click", () => {
-    const isDark = document.body.classList.toggle("theme-dark");
-    localStorage.setItem(THEME_STORAGE_KEY, isDark ? "dark" : "light");
-    toggleButton.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+  toggleBtn.addEventListener("click", () => {
+    const current = document.body.classList.contains("theme-dark")
+      ? "dark"
+      : "light";
+    const next = current === "dark" ? "light" : "dark";
+    applyTheme(next);
+    updateThemeButtonLabel(toggleBtn, next);
+    localStorage.setItem("clsa-theme", next);
   });
 }
 
-/**
- * Scroll reveal: fades in elements with the .reveal-on-scroll class
- * when they come into view.
- */
-function setupScrollReveal() {
-  const elements = document.querySelectorAll(".reveal-on-scroll");
-  if (!elements.length || !("IntersectionObserver" in window)) {
-    return;
+function applyTheme(mode) {
+  if (mode === "dark") {
+    document.body.classList.add("theme-dark");
+  } else {
+    document.body.classList.remove("theme-dark");
   }
+}
+
+function updateThemeButtonLabel(button, mode) {
+  button.textContent = mode === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode";
+}
+
+// -------------------------------
+// Scroll reveal animation
+// -------------------------------
+function setupScrollReveal() {
+  const items = document.querySelectorAll(".reveal-on-scroll");
+  if (!items.length || !("IntersectionObserver" in window)) return;
 
   const observer = new IntersectionObserver(
-    (entries, obs) => {
+    (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("reveal-visible");
-          obs.unobserve(entry.target);
+          observer.unobserve(entry.target);
         }
       });
     },
-    {
-      threshold: 0.15,
-    }
+    { threshold: 0.15 }
   );
 
-  elements.forEach((el) => observer.observe(el));
+  items.forEach((item) => observer.observe(item));
+}
+
+// -------------------------------
+// API #2: OpenWeatherMap (Due West)
+// -------------------------------
+// Your actual key from the screenshot:
+const OPEN_WEATHER_KEY = "1c8ea16fb18b366d2b65d4136fe77cd7";
+
+function loadDueWestWeather() {
+  const weatherBox = document.getElementById("weather-box");
+  if (!weatherBox) return; // only on pages with weather
+
+  // If you ever blank this out for GitHub, this guard will show a message instead of erroring.
+  if (!OPEN_WEATHER_KEY || OPEN_WEATHER_KEY === "YOUR_OPENWEATHER_API_KEY_HERE") {
+    weatherBox.innerHTML = `
+      <p class="mb-0 text-muted">
+        Add your OpenWeatherMap API key in <code>script.js</code> to load live weather.
+      </p>
+    `;
+    return;
+  }
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=Due%20West,US&units=imperial&appid=${OPEN_WEATHER_KEY}`;
+
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Weather request failed: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const temp = Math.round(data.main.temp);
+      const feelsLike = Math.round(data.main.feels_like);
+      const desc =
+        data.weather && data.weather[0]
+          ? data.weather[0].description
+          : "Current conditions";
+
+      weatherBox.innerHTML = `
+        <p class="mb-1">
+          <strong>${temp}°F</strong> — ${desc}
+        </p>
+        <p class="mb-0 text-muted">
+          Feels like ${feelsLike}°F in Due West right now.
+        </p>
+      `;
+    })
+    .catch((error) => {
+      console.error("Weather error:", error);
+      weatherBox.innerHTML = `
+        <p class="mb-0 text-muted">
+          Weather data is unavailable right now. Check back later or verify your API key.
+        </p>
+      `;
+    });
 }
