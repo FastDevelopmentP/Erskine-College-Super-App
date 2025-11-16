@@ -12,13 +12,12 @@ body {
   color: #111111;
 }
 
-/* Main content spacing (shared) */
+/* Main content spacing */
 main {
   padding-top: 2rem;
   padding-bottom: 3rem;
 }
 
-/* Section band behind cards on home page */
 /* Section band behind cards on home page */
 .app-section {
   position: relative;
@@ -35,7 +34,7 @@ main {
   z-index: -1;
   pointer-events: none;
 
-  /* EB building as a very soft background */
+  /* EB building as soft background with parallax-ish effect */
   background-image:
     linear-gradient(
       to bottom,
@@ -44,11 +43,11 @@ main {
     ),
     url("../images/EB.jpeg");
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
-  opacity: 1; /* adjust up/down if you want more/less visible */
+  background-attachment: fixed; /* subtle parallax on scroll */
+  opacity: 1;
 }
-
 
 /* Headings */
 h1, h2, h3, h4, h5 {
@@ -66,6 +65,13 @@ h1, h2, h3, h4, h5 {
   font-weight: 700;
 }
 
+/* Navbar logo */
+.brand-logo {
+  height: 30px;
+  width: auto;
+  border-radius: 4px;
+}
+
 /* Active nav link highlight */
 .navbar-dark .navbar-nav .nav-link.active {
   color: var(--erskine-gold);
@@ -73,16 +79,23 @@ h1, h2, h3, h4, h5 {
   border-bottom: 2px solid var(--erskine-gold);
 }
 
-/* Hero section on home page */
+/* Theme toggle button in navbar */
+.theme-toggle-btn {
+  font-size: 0.8rem;
+  border-radius: 999px;
+  padding: 0.25rem 0.9rem;
+  border-width: 1px;
+}
+
+/* Hero section (DMSC background) */
 .hero {
   color: #ffffff;
   padding: 2.75rem 0 3.25rem 0;
 }
 
 .hero-dmsc {
-  /* big background photo with maroon/black overlay */
   background-image:
-    linear-gradient(120deg, rgba(74, 12, 28, 0.75), rgba(17, 17, 17, 0.7)),
+    linear-gradient(120deg, rgba(74, 12, 28, 0.65), rgba(17, 17, 17, 0.6)),
     url("../images/DMSC.jpg");
   background-size: cover;
   background-position: center;
@@ -111,6 +124,24 @@ h1, h2, h3, h4, h5 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.75);
+}
+
+/* About Erskine band */
+.about-erskine {
+  padding-top: 1.25rem;
+  padding-bottom: 1.5rem;
+}
+
+.about-pill {
+  display: inline-block;
+  border-radius: 999px;
+  border: 1px solid rgba(74, 12, 28, 0.25);
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #4a0c1c;
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
 /* Buttons */
@@ -174,28 +205,11 @@ h1, h2, h3, h4, h5 {
   font-size: 0.95rem;
 }
 
-/* Brand logo in navbar */
-.brand-logo {
-  height: 30px;
-  width: auto;
-  border-radius: 4px;
-}
-
-/* Hero photo on home page */
-.hero-photo {
-  max-height: 160px;
-  width: auto;
-  border-radius: 8px;
-  object-fit: cover;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
-}
-
-/* Campus photo grid on home page */
+/* Campus life snapshots on home page */
 .campus-photo-grid {
   margin-top: 3rem;
 }
 
-/* Individual photo cards */
 .photo-card {
   background-color: #ffffff;
   border-radius: 10px;
@@ -204,7 +218,6 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
-/* Photo images */
 .photo-img {
   width: 100%;
   height: 220px;
@@ -212,10 +225,107 @@ h1, h2, h3, h4, h5 {
   border-radius: 8px;
 }
 
-/* Photo captions */
 .photo-caption {
   font-size: 0.82rem;
   margin-top: 0.4rem;
   color: #555;
 }
 
+/* Scroll reveal animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Footer */
+.site-footer {
+  margin-top: 2rem;
+  padding: 1rem 0 1.25rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: #111111;
+  color: #dddddd;
+}
+
+.site-footer .small {
+  color: #cccccc;
+}
+
+.footer-seal {
+  height: 32px;
+  width: auto;
+  border-radius: 50%;
+  background-color: #ffffff;
+  padding: 2px;
+}
+
+/* Dark mode overrides */
+body.theme-dark {
+  background-color: #111111;
+  color: #f5f5f5;
+}
+
+body.theme-dark .app-section {
+  background-color: #20232a;
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+body.theme-dark .app-section::before {
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(24, 26, 31, 0.9),
+      rgba(24, 26, 31, 0.95)
+    ),
+    url("../images/EB.jpeg");
+  opacity: 0.4;  /* dark but still visible */
+}
+
+
+body.theme-dark .card {
+  background-color: #1f1f1f;
+  border-color: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+body.theme-dark .card-title,
+body.theme-dark h1,
+body.theme-dark h2,
+body.theme-dark h3 {
+  color: #f5f5f5;
+}
+
+body.theme-dark {
+  background-color: #181a1f;   /* soft dark gray */
+  color: #f5f5f5;
+}
+
+body.theme-dark .hero-dmsc {
+  background-image:
+    linear-gradient(120deg, rgba(10, 10, 10, 0.8), rgba(0, 0, 0, 0)),
+    url("../images/DMSC.jpg");
+}
+
+body.theme-dark .site-footer {
+  background-color: #000000;
+}
+
+body.theme-dark .about-pill {
+  background-color: rgba(17, 17, 17, 0.95);
+  border-color: rgba(212, 175, 55, 0.4);
+  color: #f5f5f5;
+}
+
+body.theme-dark .photo-card {
+  background-color: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.theme-dark .theme-toggle-btn {
+  border-color: rgba(255, 255, 255, 0.4);
+}

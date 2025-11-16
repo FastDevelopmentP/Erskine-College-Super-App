@@ -31,12 +31,14 @@
       </button>
 
       <div class="collapse navbar-collapse" id="mainNavbar">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="campus-map.html">Campus Map</a>
+            <a class="nav-link active" aria-current="page" href="campus-map.html">
+              Campus Map
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="housing-services.html">Housing & Work Orders</a>
@@ -44,14 +46,19 @@
           <li class="nav-item">
             <a class="nav-link" href="academic-support.html">Advising & Study Help</a>
           </li>
+          <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+            <button id="theme-toggle" type="button" class="btn btn-outline-light btn-sm theme-toggle-btn">
+              🌙 Dark Mode
+            </button>
+          </li>
         </ul>
-
       </div>
     </div>
   </nav>
 
-  <main class="container py-5">
-    <header class="mb-4">
+  <!-- Main content -->
+  <main class="container app-section py-5">
+    <header class="mb-4 reveal-on-scroll">
       <h1>Campus Map</h1>
       <p class="lead">
         Use this page to explore key locations around Erskine and Due West.
@@ -59,7 +66,7 @@
     </header>
 
     <!-- API Placeholder -->
-    <section class="mb-4">
+    <section class="mb-4 reveal-on-scroll">
       <h2 class="h4">Interactive Map</h2>
       <p>
         A live campus map will appear here using a mapping API (e.g., Google Maps).
@@ -71,20 +78,21 @@
       </div>
     </section>
 
-    <section>
+    <section class="reveal-on-scroll">
       <h2 class="h4">Quick Directions</h2>
       <p>
         In the final version, you’ll be able to enter a building name and get walking directions.
       </p>
       <form id="directions-form" class="row g-3">
         <div class="col-md-8">
-          <label for="building-input" class="form-label">Destination Building or Residence Hall</label>
-            <input 
-              type="text" 
-              class="form-control" 
-              id="building-input" 
-              placeholder="e.g., Bonner Hall, Edwards, Watkins Student Center">
-
+          <label for="building-input" class="form-label">
+            Destination Building or Residence Hall
+          </label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="building-input" 
+            placeholder="e.g., Bonner Hall, Edwards, Watkins Student Center">
         </div>
         <div class="col-md-4 d-flex align-items-end">
           <button type="submit" class="btn btn-primary w-100">
@@ -97,6 +105,21 @@
       </small>
     </section>
   </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+      <div class="d-flex align-items-center gap-2">
+        <img src="images/erskine-seal.jpg" alt="Erskine College seal" class="footer-seal">
+        <span class="small">
+          Campus Life Super App • Erskine College
+        </span>
+      </div>
+      <span class="small text-muted">
+        Always confirm dates, policies, and schedules with official Erskine resources.
+      </span>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
