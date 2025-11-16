@@ -16,9 +16,12 @@
 </head>
 <body>
   <!-- Global Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark erskine-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html">Campus Life Super App</a>
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="images/ace-logo.jpg" alt="Erskine Ace Logo" class="brand-logo me-2">
+        <span>Campus Life Super App</span>
+      </a>
       <button 
         class="navbar-toggler" 
         type="button" 
@@ -41,17 +44,34 @@
           <li class="nav-item">
             <a class="nav-link" href="housing-services.html">Housing & Work Orders</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="academic-support.html">Advising & Study Help</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
+  <!-- Hero band -->
+  <section class="hero hero-dmsc">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 hero-content">
+        <div class="hero-tagline">Erskine College • Campus Life</div>
+        <h1>Welcome to the Campus Life Super App</h1>
+          <p>
+            A central hub for maps, housing, advising, and academic support resources.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Main Content -->
-  <main class="container py-5">
+  <main class="container app-section">
     <header class="text-center mb-4">
-      <h1>Welcome to the Campus Life Super App</h1>
       <p class="lead">
-        A central hub for maps, housing, and daily campus life tools.
+        Choose a tool below to get started.
       </p>
     </header>
 
@@ -87,10 +107,42 @@
           <div class="card-body">
             <h2 class="h5 card-title">More Tools (Coming Soon)</h2>
             <p class="card-text">
-              Space reserved for additional APIs and features from wireframe.
+              Space reserved for additional APIs and features from the wireframe.
             </p>
             <button class="btn btn-outline-secondary" disabled>Coming Soon</button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Campus life snapshots -->
+    <section class="campus-photo-grid my-5">
+      <h2 class="h5 text-center mb-4">Campus Life Snapshots</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-5">
+          <figure class="photo-card">
+            <img 
+              src="images/debate.jpeg"
+              alt="Campus event"
+              class="photo-img"
+            >
+            <figcaption class="photo-caption">
+              Students at campus events and academic competitions.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="col-md-3">
+          <figure class="photo-card">
+            <img 
+              src="images/erskine-seal.jpg"
+              alt="Erskine Seal"
+              class="photo-img"
+            >
+            <figcaption class="photo-caption">
+              “Scientia cum Moribus Conjuncta” — knowledge joined with character.
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -99,7 +151,7 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Your JS -->
+  <!-- App JS -->
   <script src="js/script.js"></script>
 </body>
 </html>
