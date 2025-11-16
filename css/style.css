@@ -12,6 +12,13 @@ body {
   color: #111111;
 }
 
+/* Make images scale nicely on mobile */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* Main content spacing */
 main {
   padding-top: 2rem;
@@ -286,7 +293,6 @@ body.theme-dark .app-section::before {
   opacity: 0.4;  /* dark but still visible */
 }
 
-
 body.theme-dark .card {
   background-color: #1f1f1f;
   border-color: rgba(255, 255, 255, 0.06);
@@ -328,4 +334,39 @@ body.theme-dark .photo-card {
 
 body.theme-dark .theme-toggle-btn {
   border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: #000;
+  color: #fff;
+  z-index: 1000;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  transform: translateY(-150%);
+  transition: transform 0.2s;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Small-screen tweaks */
+@media (max-width: 576px) {
+  .app-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .navbar-brand span {
+    font-size: 0.95rem;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+  }
 }

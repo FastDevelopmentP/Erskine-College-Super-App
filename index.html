@@ -15,11 +15,13 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Global Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark erskine-navbar">
+  <nav class="navbar navbar-expand-lg navbar-dark erskine-navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="images/ace-logo.jpg" alt="Erskine Ace Logo" class="brand-logo me-2">
+        <img src="images/ace-logo.jpg" alt="Erskine College ACE logo" class="brand-logo me-2">
         <span>Campus Life Super App</span>
       </a>
       <button 
@@ -91,7 +93,7 @@
   </section>
 
   <!-- Main Content -->
-  <main class="container app-section">
+  <main id="main-content" class="container app-section">
     <header class="text-center mb-4">
       <p class="lead">
         Choose a tool below to get started.
@@ -105,8 +107,7 @@
           <div class="card-body">
             <h2 class="h5 card-title">Campus Map</h2>
             <p class="card-text">
-              Find key locations around campus and Due West. 
-              (Map API integration coming soon!)
+              Explore an interactive campus map and check current weather in Due West.
             </p>
             <a href="campus-map.html" class="btn btn-primary">Open Map</a>
           </div>
@@ -128,11 +129,11 @@
       <div class="col-md-4">
         <div class="card h-100">
           <div class="card-body">
-            <h2 class="h5 card-title">More Tools (Coming Soon)</h2>
+            <h2 class="h5 card-title">Advising & Study Help</h2>
             <p class="card-text">
-              Space reserved for additional APIs and features from the wireframe.
+              Use catalog and portal links, plus campus study resources, to plan your semester.
             </p>
-            <button class="btn btn-outline-secondary" disabled>Coming Soon</button>
+            <a href="academic-support.html" class="btn btn-primary">Advising Tools</a>
           </div>
         </div>
       </div>
@@ -146,7 +147,7 @@
           <figure class="photo-card">
             <img 
               src="images/debate.jpeg"
-              alt="Campus event"
+              alt="Students at a campus debate event"
               class="photo-img"
             >
             <figcaption class="photo-caption">
@@ -159,7 +160,7 @@
           <figure class="photo-card">
             <img 
               src="images/erskine-seal.jpg"
-              alt="Erskine Seal"
+              alt="Erskine College seal"
               class="photo-img"
             >
             <figcaption class="photo-caption">

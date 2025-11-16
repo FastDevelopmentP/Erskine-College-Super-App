@@ -12,11 +12,13 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Shared Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark erskine-navbar">
+  <nav class="navbar navbar-expand-lg navbar-dark erskine-navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="images/ace-logo.jpg" alt="Erskine Ace Logo" class="brand-logo me-2">
+        <img src="images/ace-logo.jpg" alt="Erskine College ACE logo" class="brand-logo me-2">
         <span>Campus Life Super App</span>
       </a>
       <button 
@@ -57,7 +59,7 @@
   </nav>
 
   <!-- Main content -->
-  <main class="container app-section py-5">
+  <main id="main-content" class="container app-section py-5">
     <header class="mb-4 reveal-on-scroll">
       <h1>Campus Map</h1>
       <p class="lead">
@@ -74,6 +76,7 @@
       <div class="ratio ratio-16x9 mb-2">
         <iframe 
           id="campus-map-frame"
+          title="Erskine College interactive campus map"
           src="https://www.google.com/maps?q=Erskine%20College%20Due%20West%20SC&output=embed" 
           width="640" 
           height="480"

@@ -1,4 +1,3 @@
-// script.js
 // Interactivity and API calls for the Campus Life Super App.
 
 document.addEventListener("DOMContentLoaded", () => {
